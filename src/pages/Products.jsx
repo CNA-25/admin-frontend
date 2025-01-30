@@ -1,11 +1,11 @@
-
+// Products page
 import React from "react";
 
 const Products = () => {
     return (
         <div>
             <h1>
-                About page yeeehaawww
+                Products page
             </h1>
         </div>
     );
