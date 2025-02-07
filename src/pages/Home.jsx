@@ -1,5 +1,4 @@
-// Filename - pages/index.js
-
+// Admin Frontend home page
 import React from "react";
 
 const Home = () => {
