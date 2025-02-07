@@ -1,4 +1,4 @@
-// Products page
+// Admin Frontend products page
 import React from "react";
 import List from "../components/common/listProducts";
 import "../style/List.css";
