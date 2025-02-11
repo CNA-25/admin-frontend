@@ -8,6 +8,7 @@ import {
 import Home from "./pages/Home";
 import About from "./pages/Products";
 import Navbar from "./navbar";
+import Login from "./pages/Login";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route path="/products" element={<About />} />
+                <Route path="/login" element={<Login/>} />
             </Routes>
         </Router>
     );
