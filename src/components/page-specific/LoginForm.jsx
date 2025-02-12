@@ -8,11 +8,24 @@ import { useForm } from "react-hook-form";
 function LoginForm() {
     const {register, handleSubmit, formState: { errors } } = useForm();
 
+
+    const testUser = {
+      "email": "john.pork@example.com",
+      "password": "abcdef12345",
+      "firstName": "John",
+      "lastName": "Pork"
+    }
+    localStorage.setItem(testUser.email , JSON.stringify(testUser));
+    console.log(`localStorage.testUser: ${localStorage.getItem(testUser.email)}`);
+
     const onSubmit = (data) => {
       const userData = JSON.parse(localStorage.getItem(data.email));
+      
       if (userData) {
+        console.log(`Parsed userData: ${JSON.stringify(userData)}`)
+
         if (userData.password === data.password) {
-          console.log(userData.name + ", you are successfully logged in.");
+          console.log(userData.firstName + ", you are successfully logged in.");
         } else {
           console.log("Email or password is incorrect.");
         }
