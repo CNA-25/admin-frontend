@@ -10,4 +10,4 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    command: sh -c "if [\"$MODE\" = 'development' ]; then npm run dev; else npm start; fi"K
+    command: sh -c "if [\"$MODE\" = 'development' ]; then npm run dev; else npm start; fi"
