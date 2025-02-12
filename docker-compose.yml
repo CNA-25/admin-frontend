@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  react-app:
+    build: .
+    container_name: admin-frontend
+    ports:
+      - "8080:3000"
+    environment:
+      - MODE=production
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: sh -c "if [\"$MODE\" = 'development' ]; then npm run dev; else npm start; fi"K
