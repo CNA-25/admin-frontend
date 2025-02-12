@@ -7,7 +7,7 @@ const Inventory = () => {
         <div>
             <div id="title-container">
                 <h1>Inv</h1>
-
+                
             </div>
         </div>
     );
