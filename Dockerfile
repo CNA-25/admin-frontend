@@ -21,6 +21,10 @@ FROM nginx:latest
 # Copy the built app from the build stage to NGINX's serving directory
 COPY --from=build /app/build /usr/share/nginx/html
 
+# Set permissions to allow nginx to serve the files
+RUN chown -R nginx:nginx /usr/share/nginx/html
+RUN chmod -R 755 /usr/share/nginx/html
+
 # Expose the HTTP port
 EXPOSE 80
 
