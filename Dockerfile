@@ -1,20 +1,28 @@
-# Use the official Node.js image from the Docker Hub as the base image
-FROM node:22
+# Stage 1: Build the React app
+FROM node:22 AS build
 
-# Create and change to the app directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install the app dependencies
+# Install dependencies
 RUN npm install
 
-# Copy the rest of the application code to the working directory
+# Copy the source code
 COPY . .
 
-# Expose the port the app runs on
-EXPOSE 3000
-RUN chown -R nginx:nginx /opt/app-root/src && chmod -R 755 /opt/app-root/src
-# Define the command to run the app
-CMD ["sh", "-c", "if [ \"$MODE\" = 'development' ]; then npm run dev; else npm start; fi"]
+# Build the React app (this will create a build/ directory)
+RUN npm run build
+
+# Stage 2: Serve the app using NGINX
+FROM nginx:latest
+
+# Copy the built app from the build stage to NGINX's serving directory
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Expose the HTTP port
+EXPOSE 80
+
+# Run NGINX in the foreground
+CMD ["nginx", "-g", "daemon off;"]
