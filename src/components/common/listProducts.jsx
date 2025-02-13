@@ -1,5 +1,6 @@
 import "../../style/List.css";
 import porkImage from "../../assets/pork.jpg";
+import EditModal from "../page-specific/modal"
 
 const products = [
     {
@@ -28,10 +29,12 @@ const products = [
         "updated_at": "2024-01-01T20:54:00Z"
     }
 ];
+   
 
 
 
 export default function List() {
+
     return (
         <div className="product-list">
             {products.map((product, index) => (
@@ -57,7 +60,12 @@ export default function List() {
                         </div>
                     </div>
                     <div className="product-image">
-                        <img src={porkImage} alt="img src" /> <br /><br />
+                        <img src={porkImage} alt="img src" />
+
+                        <div className="product-edit">
+                            <EditModal product={product} /> {/*Modal component*/}
+                        </div>
+                        
                     </div>
                 </div>
             ))}
