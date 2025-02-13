@@ -26,7 +26,7 @@ RUN chown -R nginx:nginx /usr/share/nginx/html
 RUN chmod -R 755 /usr/share/nginx/html
 
 # Expose the HTTP port
-EXPOSE 80
+EXPOSE 8080
 
 # Run NGINX in the foreground
 CMD ["nginx", "-g", "daemon off;"]
