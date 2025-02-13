@@ -1,32 +1,20 @@
-# Stage 1: Build the React app
-FROM node:20 AS builder
+# Use the official Node.js image from the Docker Hub as the base image
+FROM node:22
 
+# Create and change to the app directory
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
+
+# Install the app dependencies
 RUN npm install
 
+# Copy the rest of the application code to the working directory
 COPY . .
-RUN npm run build
 
-# Stage 2: Serve with Nginx
-FROM nginx:latest
-
-WORKDIR /usr/share/nginx/html
-
-# Remove default Nginx static files
-RUN rm -rf ./*
-
-# Copy built React app from the previous stage
-COPY --from=builder /app/dist/ .
-
-# Ensure proper permissions for OpenShift (fixing permission issue)
-RUN chmod -R 777 /var/cache/nginx /var/run /var/log/nginx
-
-# Copy custom Nginx config
-COPY --from=builder /app/nginx.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 8080
-USER 1001  # Run as non-root user
-
-CMD ["nginx", "-g", "daemon off;"]
+# Expose the port the app runs on
+EXPOSE 3000
+RUN chown -R nginx:nginx /opt/app-root/src && chmod -R 755 /opt/app-root/src
+# Define the command to run the app
+CMD ["sh", "-c", "if [ \"$MODE\" = 'development' ]; then npm run dev; else npm start; fi"]
