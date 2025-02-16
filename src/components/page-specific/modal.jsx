@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Popup from "reactjs-popup";
 
 
 export default function EditModal({ product }) {
     const [editedProduct, setEditedProduct] = useState(product);
+
+    useEffect(() => {
+        setEditedProduct(product);
+    }, [product]);
 
     const handleChange = (e) => {
         setEditedProduct({ ...editedProduct, [e.target.name]: e.target.value });
