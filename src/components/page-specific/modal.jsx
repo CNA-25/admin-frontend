@@ -46,6 +46,16 @@ export default function EditModal({ product }) {
                                 />
                             </label><br/>
                             <label>
+                                Image:
+                                <input 
+                                    type="file" 
+                                    name="image"
+                                    accept="image/*"
+                                    
+                                    onChange={handleChange} 
+                                />
+                            </label><br/>
+                            <label>
                                 Description: <br/>
                                 <textarea 
                                     name="description"
