@@ -15,7 +15,7 @@ FROM nginx:latest
 # Copy the built app
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Copy the custom NGINX config
+# Ensure correct NGINX config location
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose the correct port
