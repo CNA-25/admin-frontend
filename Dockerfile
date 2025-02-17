@@ -3,30 +3,23 @@ FROM node:22 AS build
 
 WORKDIR /app
 
-# Copy package.json and package-lock.json
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy the source code
 COPY . .
-
-# Build the React app (this will create a build/ directory)
 RUN npm run build
 
 # Stage 2: Serve the app using NGINX
 FROM nginx:latest
 
-# Copy the built app from the build stage to NGINX's serving directory
+# Copy the built app
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Set permissions to allow nginx to serve the files
-RUN chown -R nginx:nginx /usr/share/nginx/html
-RUN chmod -R 755 /usr/share/nginx/html
+# Copy the custom NGINX config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose the HTTP port
-EXPOSE 8080
+# Expose the correct port
+EXPOSE 80
 
 # Run NGINX in the foreground
 CMD ["nginx", "-g", "daemon off;"]
