@@ -115,3 +115,32 @@ body {
     font-weight: bold;
     font-size: 16px;
 }
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0%;
+    
+}
+
+.create-button {
+    gap: 20px;
+    
+    padding: 10px 20px;
+
+    background-color: #0b921d;
+    border: none;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-button:hover {
+    background-color: #0bc45b;
+    color: white;
+}
