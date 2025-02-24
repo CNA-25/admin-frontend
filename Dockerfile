@@ -3,30 +3,30 @@ FROM node:22 AS build
 
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
-
-# Install dependencies
+COPY package.json package-lock.json ./
 RUN npm install
 
-# Copy the source code
 COPY . .
-
-# Build the React app (this will create a build/ directory)
 RUN npm run build
 
-# Stage 2: Serve the app using NGINX
+# Stage 2: Serve with Nginx
 FROM nginx:latest
 
-# Copy the built app from the build stage to NGINX's serving directory
-COPY --from=build /app/build /usr/share/nginx/html
+WORKDIR /usr/share/nginx/html
 
-# Set permissions to allow nginx to serve the files
-RUN chown -R nginx:nginx /usr/share/nginx/html
-RUN chmod -R 755 /usr/share/nginx/html
+# Remove default Nginx static files
+RUN rm -rf ./*
 
-# Expose the HTTP port
+# Copy built React app from the previous stage
+COPY --from=builder /app/dist/ .
+
+# Ensure proper permissions for OpenShift (fixing permission issue)
+RUN chmod -R 777 /var/cache/nginx /var/run /var/log/nginx
+
+# Copy custom Nginx config
+COPY --from=builder /app/nginx.conf /etc/nginx/conf.d/default.conf
+
 EXPOSE 8080
+USER 1001  # Run as non-root user
 
-# Run NGINX in the foreground
 CMD ["nginx", "-g", "daemon off;"]
