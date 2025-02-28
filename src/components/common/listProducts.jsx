@@ -1,47 +1,31 @@
+import React, { useState, useEffect } from "react";
 import "../../style/List.css";
 import porkImage from "../../assets/pork.jpg";
 import EditModal from "../page-specific/modal"
 
-const products = [
-    {
-        "sku": "1-ABC",
-        "name": "Pale Ale",
-        "price": 59.99,
-        "description": "En fruktig och frisk pale ale. En fruktig och frisk pale ale. En fruktig och frisk pale ale. En fruktig och frisk pale ale. En fruktig och frisk pale ale.",
-        "image": "../assets/images/pork.jpg",
-        "created_at": "2024-01-01T20:54:00Z",
-        "updated_at": "2024-01-01T20:54:00Z"
-    },   {
-        "sku": "2-ABC",
-        "name": "kakirumppa",
-        "price": 79.99,
-        "description": "En fruktig och frisk pale ale.",
-        "image": "path-to-image",
-        "created_at": "2024-01-01T20:54:00Z",
-        "updated_at": "2024-01-01T20:54:00Z"
-    },   {
-        "sku": "3-AB",
-        "name": "ars",
-        "price": 29.99,
-        "description": "En fruktig och frisk pale ale.",
-        "image": "path-to-image",
-        "created_at": "2024-01-01T20:54:00Z",
-        "updated_at": "2024-01-01T20:54:00Z"
-    },   {
-        "sku": "4-ABC",
-        "name": "pars",
-        "price": 16.99,
-        "description": "En fruktig och frisk pale ale.",
-        "image": "path-to-image",
-        "created_at": "2024-01-01T20:54:00Z",
-        "updated_at": "2024-01-01T20:54:00Z"
-    }
-];
-   
+const TEMP_TOKEN = process.env.REACT_APP_TEMP_TOKEN;
+
+const API_URL = "/products";
 export default function List({ searchQuery }) {
-    // Filter products based on SKU
+
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+      fetch(API_URL, {
+        method: "GET",
+        headers: {
+          "Accept": "application/json",
+          "Authorization": `Bearer ${TEMP_TOKEN}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {console.log("get all products done", data); setProducts(data.products);})
+        .catch((error) => { console.error("Error:", error);});
+    }, []);
+  
+    // Filter products based on name
     const filteredProducts = products.filter((product) =>
-        product.sku.toLowerCase().includes(searchQuery.toLowerCase())
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     return (
@@ -49,7 +33,8 @@ export default function List({ searchQuery }) {
         <div className="product-list">
             {/*  product not found */}
             {filteredProducts.length === 0 ? (<p>Womp womp... No products found.</p>):
-
+            
+            // Show filterd products
             filteredProducts.map((product, index) => (
                 <div key={index} className="product-box">
                     <div className="product-info">
@@ -73,7 +58,7 @@ export default function List({ searchQuery }) {
                         </div>
                     </div>
                     <div className="product-image">
-                        <img src={porkImage} alt="img src" />
+                        <img src={product.image} alt="img src" />
 
                         <div className="product-edit">
                             <EditModal product={product} />

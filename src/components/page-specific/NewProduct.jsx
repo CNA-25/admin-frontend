@@ -36,8 +36,31 @@ export default function CreateProduct() {
     };
 
     const handleSave = () => {
-        console.log("New Product Created:", newProduct);
-        //make an API request
+
+        const formData = new FormData();
+        formData.append('country', newProduct.country);
+        formData.append('category', newProduct.categories);
+        formData.append("name", newProduct.name);
+        formData.append("price", newProduct.price);
+        formData.append("description", newProduct.description);
+        formData.append("image", newProduct.image); 
+        formData.append("stock", 0)
+
+        const TEMP_TOKEN = process.env.REACT_APP_TEMP_TOKEN;
+        const API_URL = "/products";
+   
+    fetch(API_URL, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${TEMP_TOKEN}`,
+        },
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => console.log("Success:", data))
+    .catch(error => console.error("Error:", error));
+
+    console.log("local:New Product Created:", newProduct);
     };
 
     return (

@@ -1,6 +1,7 @@
 {
   "name": "admin-frontend",
   "version": "0.1.0",
+  "proxy": "https://product-service-cna-product-service.2.rahtiapp.fi",
   "private": true,
   "dependencies": {
     "cra-template": "1.2.0",
@@ -39,4 +40,5 @@
   "devDependencies": {
     "web-vitals": "^4.2.4"
   }
+  
 }
