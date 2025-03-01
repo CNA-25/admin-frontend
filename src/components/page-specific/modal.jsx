@@ -11,7 +11,7 @@ export default function EditModal({ product }) {
 
     const handleChange = (e) => {
         setEditedProduct({ ...editedProduct, [e.target.name]: e.target.value });
-        console.log(product.sku)
+        //console.log(product.sku)
     };
 
     //PRODUCT UPDATE AND EDIT
@@ -32,11 +32,17 @@ export default function EditModal({ product }) {
         },
         body: formData,
     })
-    .then(response => response.json())
-    .then(data => console.log("Success:", data))
-    .catch(error => console.error("Error:", error));
-
-    console.log("local: Updated product:", editedProduct);
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(errData => {throw new Error(errData.error);});
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert("Product updated successfully!");
+        setTimeout(() => {window.location.reload();}, 500);
+})
+    .catch(error => alert(`Error: ${error.message}`));
 };
 
     return (
@@ -86,7 +92,7 @@ export default function EditModal({ product }) {
                         </form>
                     </div>
                     <div className="actions">
-                        <button className="button save" onClick={handleSave}>Save Changes</button>
+                        <button className="button save" onClick={handleSave} >Save Changes</button>
                         <button className="button" onClick={close}>Cancel</button>
                     </div>
                 </div>

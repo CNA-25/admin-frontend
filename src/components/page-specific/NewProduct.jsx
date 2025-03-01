@@ -56,11 +56,19 @@ export default function CreateProduct() {
         },
         body: formData,
     })
-    .then(response => response.json())
-    .then(data => console.log("Success:", data))
-    .catch(error => console.error("Error:", error));
 
-    console.log("local:New Product Created:", newProduct);
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(errData => {throw new Error(errData.error);});
+        }
+        return response.json();
+    })
+    .then(data => { 
+        alert("Product created successfully!");
+        setTimeout(() => {window.location.reload();}, 500);
+    })
+    .catch(error => alert(`Error: ${error.message}`));
+
     };
 
     return (

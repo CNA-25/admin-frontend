@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "../../style/List.css";
-import porkImage from "../../assets/pork.jpg";
 import EditModal from "../page-specific/modal"
 
 const TEMP_TOKEN = process.env.REACT_APP_TEMP_TOKEN;
