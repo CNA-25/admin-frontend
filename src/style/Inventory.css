@@ -21,6 +21,10 @@
   transition: box-shadow 0.2s ease-in-out; /* Smooth transition for shadow */
 }
 
+h1 {
+  text-align: center;
+}
+
 
 .inventory-card:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);

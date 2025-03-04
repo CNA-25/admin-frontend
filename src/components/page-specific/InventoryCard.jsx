@@ -12,7 +12,7 @@ const InventoryCard = ({ item }) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const token = localStorage.getItem('access_token');
-  const URL = 'https://dev-inventory-service-inventory-service.2.rahtiapp.fi';
+  const URL = 'https://inventory-service-inventory-service.2.rahtiapp.fi';
 
   const handleIncrease = async () => {
     if (increaseQuantity <= 0) {
