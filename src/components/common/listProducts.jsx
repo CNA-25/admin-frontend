@@ -57,7 +57,7 @@ export default function List({ searchQuery }) {
                         </div>
                     </div>
                     <div className="product-image">
-                        <img src={`https://product-service-cna-product-service.2.rahtiapp.fi/${product.image}`} alt="img" />
+                        <img src={`https://product-service-cna-product-service.2.rahtiapp.fi${product.image}`} alt="img" />
 
                         <div className="product-edit">
                             <EditModal product={product} />
