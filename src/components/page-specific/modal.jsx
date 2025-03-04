@@ -23,12 +23,12 @@ export default function EditModal({ product }) {
     formData.append("description", editedProduct.description);
     formData.append("image", editedProduct.image);
 
-    const TEMP_TOKEN = process.env.REACT_APP_TEMP_TOKEN;
+    const TOKEN = localStorage.getItem('access_token');
  
     fetch(`/products/${product.sku}`, {
         method: "PUT",
         headers: {
-            "Authorization": `Bearer ${TEMP_TOKEN}`,
+            "Authorization": `Bearer ${TOKEN}`,
         },
         body: formData,
     })

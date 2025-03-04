@@ -46,13 +46,13 @@ export default function CreateProduct() {
         formData.append("image", newProduct.image); 
         formData.append("stock", 0)
 
-        const TEMP_TOKEN = process.env.REACT_APP_TEMP_TOKEN;
-        const API_URL = "/products";
+        const TOKEN = localStorage.getItem('access_token');
+        const API_URL = "https://product-service-cna-product-service.2.rahtiapp.fi/products";
    
     fetch(API_URL, {
         method: "POST",
         headers: {
-            "Authorization": `Bearer ${TEMP_TOKEN}`,
+            "Authorization": `Bearer ${TOKEN}`,
         },
         body: formData,
     })

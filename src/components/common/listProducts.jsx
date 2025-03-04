@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import "../../style/List.css";
 import EditModal from "../page-specific/modal"
 
-const TEMP_TOKEN = process.env.REACT_APP_TEMP_TOKEN;
-const API_URL = process.env.REACT_APP_PRODUCTS_API || "https://product-service-cna-product-service.2.rahtiapp.fi/products";
+const TOKEN = localStorage.getItem('access_token');
+const API_URL ="https://product-service-cna-product-service.2.rahtiapp.fi/products";
 
 export default function List({ searchQuery }) {
 
@@ -14,7 +14,7 @@ export default function List({ searchQuery }) {
         method: "GET",
         headers: {
           "Accept": "application/json",
-          "Authorization": `Bearer ${TEMP_TOKEN}`,
+          "Authorization": `Bearer ${TOKEN}`,
         },
       })
         .then((response) => response.json())
@@ -31,7 +31,7 @@ export default function List({ searchQuery }) {
         
         <div className="product-list">
             {/*  product not found */}
-            {filteredProducts.length === 0 ? (<p>Womp womp... No products found.</p>):
+            {filteredProducts.length === 0 ? (<p>No products found...</p>):
             
             // Show filterd products
             filteredProducts.map((product, index) => (
@@ -57,7 +57,7 @@ export default function List({ searchQuery }) {
                         </div>
                     </div>
                     <div className="product-image">
-                        <img src={product.image} alt="img src" />
+                        <img src={`${API_URL}${product.image}`} alt="img" />
 
                         <div className="product-edit">
                             <EditModal product={product} />
