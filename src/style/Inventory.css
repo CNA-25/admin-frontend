@@ -21,7 +21,7 @@
   transition: box-shadow 0.2s ease-in-out; /* Smooth transition for shadow */
 }
 
-/* Remove hover effect so that cards don't move */
+
 .inventory-card:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }

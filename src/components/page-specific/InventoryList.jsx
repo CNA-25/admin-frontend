@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import InventoryCard from './InventoryCard';  // Import InventoryCard component
+import InventoryCard from './InventoryCard';  
 import "../../style/Inventory.css";
 
 const InventoryList = () => {
@@ -8,7 +8,7 @@ const InventoryList = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const token = process.env.REACT_APP_API_BEARER_TOKEN; // Correct token reference with REACT_APP_ prefix
+    const token = process.env.REACT_APP_API_BEARER_TOKEN; // temp token
 
     if (!token) {
       setError("Bearer token is missing.");
@@ -31,7 +31,7 @@ const InventoryList = () => {
         setError(err.message);
         setLoading(false);
       });
-  }, []); // Empty dependency array ensures this runs once on mount
+  }, []); 
 
   if (loading) {
     return <div>Loading...</div>;
