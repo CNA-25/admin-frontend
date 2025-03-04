@@ -11,7 +11,7 @@ const InventoryList = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('access_token');
-    const URL = 'https://inventory-service-inventory-service.2.rahtiapp.fi';
+    const URL = 'https://dev-inventory-service-inventory-service.2.rahtiapp.fi';
 
     if (!token) {
       setError("Bearer token is missing.");
