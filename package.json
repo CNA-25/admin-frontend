@@ -1,6 +1,5 @@
 {
   "name": "admin-frontend",
-  "proxy": "https://dev-inventory-service-inventory-service.2.rahtiapp.fi",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

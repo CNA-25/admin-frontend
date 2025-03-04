@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import InventoryCard from './InventoryCard';  
 import "../../style/Inventory.css";
 
+
+
 const InventoryList = () => {
   const [inventory, setInventory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const token = process.env.REACT_APP_API_BEARER_TOKEN; // temp token
+    const token = localStorage.getItem('access_token');
+    const URL = 'https://inventory-service-inventory-service.2.rahtiapp.fi';
 
     if (!token) {
       setError("Bearer token is missing.");
@@ -16,7 +19,7 @@ const InventoryList = () => {
       return;
     }
 
-    fetch('/inventory', {
+    fetch(`${URL}/inventory`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,

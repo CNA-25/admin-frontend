@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import "../../style/Inventory.css";
 
+
+
 const InventoryCard = ({ item }) => {
   const [increaseQuantity, setIncreaseQuantity] = useState(0);  
   const [decreaseQuantity, setDecreaseQuantity] = useState(0);
@@ -9,7 +11,8 @@ const InventoryCard = ({ item }) => {
   const [success, setSuccess] = useState('');
   const [isEditing, setIsEditing] = useState(false);
 
-  const token = process.env.REACT_APP_API_BEARER_TOKEN; // temp token
+  const token = localStorage.getItem('access_token');
+  const URL = 'https://inventory-service-inventory-service.2.rahtiapp.fi';
 
   const handleIncrease = async () => {
     if (increaseQuantity <= 0) {
@@ -23,7 +26,7 @@ const InventoryCard = ({ item }) => {
     };
 
     try {
-      const response = await fetch('/inventory/increase', {
+      const response = await fetch(`${URL}/inventory/increase`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,7 +66,7 @@ const InventoryCard = ({ item }) => {
     };
 
     try {
-      const response = await fetch('/inventory/decrease', {
+      const response = await fetch(`${URL}/inventory/decrease`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
