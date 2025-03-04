@@ -1,16 +1,13 @@
-// Inventory page
-import React from "react";
+import React from 'react';
+import InventoryList from '../components/page-specific/InventoryList';  // Import the InventoryList component
 
 const Inventory = () => {
-
-    return (
-        <div>
-            <div id="title-container">
-                <h1>Inv</h1>
-                
-            </div>
-        </div>
-    );
+  return (
+    <div>
+      <h1>Inventory Page</h1>
+      <InventoryList />
+    </div>
+  );
 };
 
 export default Inventory;
