@@ -1,4 +1,10 @@
-/* Center the product list */
+
+body {
+
+    background-color: #FFBF31;
+
+}
+
 .product-list {
     display: flex;
     flex-direction: column;
@@ -13,13 +19,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f9f9f9;
+    background-color: #e9e8e8fb;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 600px;
     width: 100%;
-    margin: 0 auto; 
+    margin: 0 auto;
 }
 
 /* Product information styling */
@@ -35,6 +41,7 @@
     padding: 5px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
 }
 
 /* Product image styling */
@@ -42,5 +49,98 @@
     width: 100px;
     height: auto;
     border-radius: 5px;
+    
+    
+}
+
+.product-image {
+    display: flex;
+    flex-direction: column;
+    align-items: left; 
     margin-left: 20px;
+}
+
+.product-edit button {
+    gap: 20px;
+    width: 100%;
+   margin-top: 100%;
+   padding: 10%;
+
+   background-color: #0b921d;
+   border: none;
+   color: white;
+   text-align: center;
+   display: inline-block;
+   font-size: 16px;
+   border-radius: 4px;
+}
+
+.product-edit button:hover {
+    background-color: #0bc45b;
+    color: white;
+  }
+
+  .modal {
+    padding: 10%;
+    background-color: rgba(177, 177, 177, 0.909);
+    width: 600px;
+    height: auto;
+    border-radius: 2%;
+    border-color: #323232;
+    border-style: solid;
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+  .close {
+    width: 10%;
+    
+  }
+  textarea {
+
+    width: 100%;
+  }
+
+  label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e9e8e8fb;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0%;
+    
+}
+
+.create-button {
+    gap: 20px;
+    
+    padding: 10px 20px;
+
+    background-color: #0b921d;
+    border: none;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-button:hover {
+    background-color: #0bc45b;
+    color: white;
 }
