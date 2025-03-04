@@ -3,8 +3,8 @@ import "../../style/List.css";
 import EditModal from "../page-specific/modal"
 
 const TEMP_TOKEN = process.env.REACT_APP_TEMP_TOKEN;
+const API_URL = process.env.REACT_APP_PRODUCTS_API || "https://product-service-cna-product-service.2.rahtiapp.fi/products";
 
-const API_URL = process.env.REACT_APP_PRODUCTS_API
 export default function List({ searchQuery }) {
 
     const [products, setProducts] = useState([]);
