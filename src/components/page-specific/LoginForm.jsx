@@ -1,51 +1,54 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import "../../style/LoginForm.css"
 
 // Based on GeeksForGeeks tutorial: Basic Registration and Login Form Using React Hook Form
 // https://www.geeksforgeeks.org/react-hook-form-create-basic-reactjs-registration-and-login-form/
 
 // Login form
 function LoginForm() {
-    const {register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
+  const API_URL = 'https://user-service-api-user-service.2.rahtiapp.fi/login';
+  const onSubmit = async (data) => {
 
-    const testUser = {
-      "email": "john.pork@example.com",
-      "password": "abcdef12345",
-      "firstName": "John",
-      "lastName": "Pork"
-    }
-    localStorage.setItem(testUser.email , JSON.stringify(testUser));
-    console.log(`localStorage.testUser: ${localStorage.getItem(testUser.email)}`);
+    try {
+      const resp = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password
+        }),
+      });
+      const respData = await resp.json();
 
-    const onSubmit = (data) => {
-      const userData = JSON.parse(localStorage.getItem(data.email));
-      
-      if (userData) {
-        console.log(`Parsed userData: ${JSON.stringify(userData)}`)
+      if (resp.ok) {
+        // Save JWT to localStorage
+        localStorage.setItem('access_token', respData.access_token);
 
-        if (userData.password === data.password) {
-          console.log(userData.firstName + ", you are successfully logged in.");
-        } else {
-          console.log("Email or password is incorrect.");
-        }
-      } else {
-        console.log("Email or password is incorrect.")
       }
-    };
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
 
-    // Form UI
-    return (
-      <>
+  // Form UI
+  return (
+    <>
+      <div className="loginCard">
         <p className="title">Sign in</p>
         <form className="Login" onSubmit={handleSubmit(onSubmit)}>
-          <input type="email" {...register("email", { required: true })} />
+          <label htmlFor="loginEmail">Email</label>
+          <input type="email" name="loginEmail" {...register("email", { required: true })} />
           {errors.email && <span style={{ color: "red" }}>Email is required.</span>}
-          <input type="password" {...register("password")} />
-          <input type={"submit"} />
+          <label htmlFor="loginPassword">Password</label>
+          <input type="password" name="loginPassword" {...register("password")} />
+          <input type={"submit"} value={"Sign in"} />
         </form>
-      </>
-    );
+      </div>
+    </>
+  );
 }
 
 export default LoginForm;
