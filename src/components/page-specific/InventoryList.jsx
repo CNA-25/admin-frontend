@@ -2,17 +2,14 @@ import React, { useEffect, useState } from 'react';
 import InventoryCard from './InventoryCard';  
 import "../../style/Inventory.css";
 
-
-
 const InventoryList = () => {
   const [inventory, setInventory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const URL = 'https://inventory-service-inventory-service.2.rahtiapp.fi';
 
-  useEffect(() => {
+  const fetchInventory = () => {
     const token = localStorage.getItem('access_token');
-    const URL = 'https://inventory-service-inventory-service.2.rahtiapp.fi';
-
     if (!token) {
       setError("Bearer token is missing.");
       setLoading(false);
@@ -27,14 +24,19 @@ const InventoryList = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setInventory(data);
+        const sortedData = data.sort((a, b) => a.productCode.localeCompare(b.productCode, undefined, { numeric: true }));
+        setInventory(sortedData);
         setLoading(false);
       })
       .catch((err) => {
         setError(err.message);
         setLoading(false);
       });
-  }, []); 
+  };
+
+  useEffect(() => {
+    fetchInventory();
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -48,7 +50,7 @@ const InventoryList = () => {
     <div>
       <div className="inventory-list">
         {inventory.map((item) => (
-          <InventoryCard key={item.productCode} item={item} />
+          <InventoryCard key={item.productCode} item={item} onStockUpdate={fetchInventory} />
         ))}
       </div>
     </div>
