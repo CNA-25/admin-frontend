@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import "../../style/Inventory.css";
 
-
-
-const InventoryCard = ({ item }) => {
+const InventoryCard = ({ item, onStockUpdate }) => {
   const [increaseQuantity, setIncreaseQuantity] = useState(0);  
   const [decreaseQuantity, setDecreaseQuantity] = useState(0);
   const [email, setEmail] = useState('');
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState('');
   const [isEditing, setIsEditing] = useState(false);
-
   const token = localStorage.getItem('access_token');
   const URL = 'https://inventory-service-inventory-service.2.rahtiapp.fi';
 
@@ -38,6 +35,7 @@ const InventoryCard = ({ item }) => {
       if (response.ok) {
         setSuccess('Stock increased successfully!');
         setError(null);
+        onStockUpdate(); // Refresh inventory list
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Something went wrong!');
@@ -78,6 +76,7 @@ const InventoryCard = ({ item }) => {
       if (response.ok) {
         setSuccess('Stock decreased successfully!');
         setError(null);
+        onStockUpdate(); // Refresh inventory list
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Something went wrong!');
@@ -103,7 +102,7 @@ const InventoryCard = ({ item }) => {
               type="number"
               placeholder="Quantity"
               value={increaseQuantity}
-              onChange={(e) => setIncreaseQuantity(parseInt(e.target.value))}
+              onChange={(e) => setIncreaseQuantity(parseInt(e.target.value) || 0)}
             />
             <button onClick={handleIncrease}>Increase Stock</button>
           </div>
@@ -122,7 +121,7 @@ const InventoryCard = ({ item }) => {
               type="number"
               placeholder="Quantity"
               value={decreaseQuantity}
-              onChange={(e) => setDecreaseQuantity(parseInt(e.target.value))}
+              onChange={(e) => setDecreaseQuantity(parseInt(e.target.value) || 0)}
             />
             <button onClick={handleDecrease}>Decrease Stock</button>
           </div>
