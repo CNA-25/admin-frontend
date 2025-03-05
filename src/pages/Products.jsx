@@ -4,6 +4,7 @@ import List from "../components/common/listProducts";
 import CreateProduct from "../components/page-specific/NewProduct";
 import "../style/List.css";
 import "../style/SearchBar.css";
+import Redirect from "../components/common/Redirect"
 
 
 
@@ -21,6 +22,7 @@ const Products = () => {
 
     return (
        <div>
+            <Redirect/>
             <h1 className="h1">Products page</h1>
             
             <div className="search-container">
