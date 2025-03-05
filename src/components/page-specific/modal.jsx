@@ -56,18 +56,19 @@ const handleDelete = () => {
     })
     .then(response => {
         if (!response.ok) {
-            return response.json().then(errData => {throw new Error(errData.error);});
+            return response.text().then(errorText => {
+                throw new Error(errorText || 'Failed to delete product');
+            });
         }
-        return response.json();
+        return response.text();
     })
     .then(() => {
         alert("Product deleted!");
-        setTimeout(() => {window.location.reload();}, 500);
-})
+        setTimeout(() => { window.location.reload(); }, 500);
+    })
     .catch(error => alert(`Error: ${error.message}`));
-     
-    }
 };
+}
 
     return (
         <Popup trigger={<button className="edit-button">Edit</button>} modal nested>
