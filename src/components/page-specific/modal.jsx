@@ -25,7 +25,7 @@ export default function EditModal({ product }) {
 
     const TOKEN = localStorage.getItem('access_token');
  
-    fetch(`/products/${product.sku}`, {
+    fetch(`https://product-service-cna-product-service.2.rahtiapp.fi/products/${product.sku}`, {
         method: "PUT",
         headers: {
             "Authorization": `Bearer ${TOKEN}`,
