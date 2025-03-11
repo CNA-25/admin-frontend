@@ -17,17 +17,19 @@ const Redirect = ({ children }) => {
             if (decodedToken.role !== "admin") {
                 console.log(`Authorization error: Insufficient access rights`);
                 // Redirect to login page
+                console.log("Redirect: Navigating to login page...")
                 return <Navigate to="/login" replace />
             }
-
-            return <Navigate to="/" replace />
+            // Return when token is valid and has admin role
+            return children;
         } catch (error) {
-            console.error("Error: ", error.message);
+            console.error("Error decoding token: ", error.message);
+            return <Navigate to="/login" replace />;
         }
 
     }
 
-    return children;
+    
 }
 
 export default Redirect;
