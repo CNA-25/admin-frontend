@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Popup from "reactjs-popup";
 
+const TOKEN = localStorage.getItem('access_token');
 
 export default function EditModal({ product }) {
     const [editedProduct, setEditedProduct] = useState(product);
@@ -22,10 +23,8 @@ export default function EditModal({ product }) {
     formData.append("price", editedProduct.price);
     formData.append("description", editedProduct.description);
     formData.append("image", editedProduct.image);
-
-    const TOKEN = localStorage.getItem('access_token');
  
-    fetch(`/products/${product.sku}`, {
+    fetch(`https://product-service-cna-product-service.2.rahtiapp.fi/products/${product.sku}`, {
         method: "PUT",
         headers: {
             "Authorization": `Bearer ${TOKEN}`,
@@ -44,6 +43,32 @@ export default function EditModal({ product }) {
 })
     .catch(error => alert(`Error: ${error.message}`));
 };
+
+//PRODUCT DELETE
+const handleDelete = () => {
+    if (window.confirm("Are you sure you want to delete this product?")) {
+ 
+    fetch(`https://product-service-cna-product-service.2.rahtiapp.fi/products/${product.sku}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${TOKEN}`,
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorText => {
+                throw new Error(errorText || 'Failed to delete product');
+            });
+        }
+        return response.text();
+    })
+    .then(() => {
+        alert("Product deleted!");
+        setTimeout(() => { window.location.reload(); }, 500);
+    })
+    .catch(error => alert(`Error: ${error.message}`));
+};
+}
 
     return (
         <Popup trigger={<button className="edit-button">Edit</button>} modal nested>
@@ -92,8 +117,9 @@ export default function EditModal({ product }) {
                         </form>
                     </div>
                     <div className="actions">
-                        <button className="button save" onClick={handleSave} >Save Changes</button>
-                        <button className="button" onClick={close}>Cancel</button>
+                        <button className="button-save" onClick={handleSave} >Save Changes</button>
+                        <button className="button-cancel" onClick={close}>Cancel</button>
+                        <button className="delete" onClick={handleDelete}>Delete</button>
                     </div>
                 </div>
             )}

@@ -144,3 +144,43 @@ textarea {
     background-color: #0bc45b;
     color: white;
 }
+
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px; 
+    width: 100%;
+
+  
+}
+
+.actions .delete {
+    margin-left: auto;
+    background-color: #b02016;
+}
+
+.actions button{
+    background-color: #5d5d5d;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+    width: 10%;
+    padding: 1%;
+
+}
+.actions .button-save{
+    width: 20%;
+    background-color: #0b921d;
+}
+
+.delete:hover{
+    background-color: #d51f12;
+}
+.button-save:hover{
+    background-color: #15ac56;
+}
+.button-cancel:hover{
+    background-color: #6e6d6d ;
+}
