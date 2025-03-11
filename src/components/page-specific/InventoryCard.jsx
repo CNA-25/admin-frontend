@@ -51,9 +51,8 @@ const InventoryCard = ({ item, onStockUpdate }) => {
       setError('Please enter a valid quantity greater than 0.');
       return;
     }
-
+  
     const requestBody = {
-      email: 'test@gmail.com',  // Hardcoded email
       items: [
         {
           productCode: item.productCode,
@@ -61,7 +60,7 @@ const InventoryCard = ({ item, onStockUpdate }) => {
         }
       ],
     };
-
+  
     try {
       const response = await fetch(`${URL}/inventory/decrease`, {
         method: 'POST',
@@ -71,7 +70,7 @@ const InventoryCard = ({ item, onStockUpdate }) => {
         },
         body: JSON.stringify(requestBody),
       });
-
+  
       if (response.ok) {
         setSuccess('Stock decreased successfully!');
         setError(null);
@@ -86,6 +85,7 @@ const InventoryCard = ({ item, onStockUpdate }) => {
       setSuccess('');
     }
   };
+  
 
   return (
     <div className="inventory-card">
