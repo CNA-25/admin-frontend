@@ -8,7 +8,7 @@ const Redirect = ({ children }) => {
 
     // Check if token exists in localStorage
     if (!token) {
-        return <Navigate to="/login" replace />;
+        return <Navigate to="/logout" replace />;
     } else {
         try {
             // Decode JWT data
@@ -18,13 +18,13 @@ const Redirect = ({ children }) => {
                 console.log(`Authorization error: Insufficient access rights`);
                 // Redirect to login page
                 console.log("Redirect: Navigating to login page...")
-                return <Navigate to="/login" replace />
+                return <Navigate to="/logout" replace />
             }
             // Return when token is valid and has admin role
             return children;
         } catch (error) {
             console.error("Error decoding token: ", error.message);
-            return <Navigate to="/login" replace />;
+            return <Navigate to="/logout" replace />
         }
 
     }

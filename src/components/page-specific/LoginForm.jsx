@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import "../../style/LoginForm.css"
 
@@ -10,6 +10,7 @@ import "../../style/LoginForm.css"
 // Login form
 function LoginForm() {
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate();
 
   const API_URL = 'https://user-service-api-user-service.2.rahtiapp.fi/login';
   const onSubmit = async (data) => {
@@ -39,7 +40,7 @@ function LoginForm() {
         localStorage.setItem('access_token', respData.access_token);
 
         // Navigate to home page
-        return <Navigate to="/" replace />
+        navigate('/', { replace: true });
         
       }
     } catch (error) {

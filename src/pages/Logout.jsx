@@ -10,13 +10,12 @@ const Logout = () => {
     if (token) {
         // Remove access token from storage
         localStorage.removeItem('access_token');
-
-        return <Navigate to="/login" replace />
+        console.log("Token removed, navigating to login page...")
     }
 
     return (
         <div>
-            <Redirect />
+            <Navigate to="/login" replace />
             <div id="title-container">
                 <h1>Trying to sign out...</h1>   
             </div>
