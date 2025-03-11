@@ -1,4 +1,3 @@
-
 body {
 
     background-color: #FFBF31;
@@ -10,7 +9,7 @@ body {
     flex-direction: column;
     gap: 20px;
     padding: 20px;
-    align-items: center; 
+    align-items: center;
     justify-content: center;
 }
 
@@ -41,7 +40,7 @@ body {
     padding: 5px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    
+
 }
 
 /* Product image styling */
@@ -49,38 +48,38 @@ body {
     width: 100px;
     height: auto;
     border-radius: 5px;
-    
-    
+
+
 }
 
 .product-image {
     display: flex;
     flex-direction: column;
-    align-items: left; 
+    align-items: left;
     margin-left: 20px;
 }
 
 .product-edit button {
     gap: 20px;
     width: 100%;
-   margin-top: 100%;
-   padding: 10%;
+    margin-top: 100%;
+    padding: 10%;
 
-   background-color: #0b921d;
-   border: none;
-   color: white;
-   text-align: center;
-   display: inline-block;
-   font-size: 16px;
-   border-radius: 4px;
+    background-color: #0b921d;
+    border: none;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
 }
 
 .product-edit button:hover {
     background-color: #0bc45b;
     color: white;
-  }
+}
 
-  .modal {
+.modal {
     padding: 10%;
     background-color: rgba(177, 177, 177, 0.909);
     width: 600px;
@@ -90,19 +89,20 @@ body {
     border-style: solid;
     display: flex;
     flex-direction: column;
-    
-  }
 
-  .close {
+}
+
+.close {
     width: 10%;
-    
-  }
-  textarea {
+
+}
+
+textarea {
 
     width: 100%;
-  }
+}
 
-  label {
+.edit-form label {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -121,12 +121,12 @@ body {
     justify-content: center;
     align-items: center;
     padding: 0%;
-    
+
 }
 
 .create-button {
     gap: 20px;
-    
+
     padding: 10px 20px;
 
     background-color: #0b921d;
