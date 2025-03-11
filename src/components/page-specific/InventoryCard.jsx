@@ -4,7 +4,6 @@ import "../../style/Inventory.css";
 const InventoryCard = ({ item, onStockUpdate }) => {
   const [increaseQuantity, setIncreaseQuantity] = useState(0);  
   const [decreaseQuantity, setDecreaseQuantity] = useState(0);
-  const [email, setEmail] = useState('');
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState('');
   const [isEditing, setIsEditing] = useState(false);
@@ -48,13 +47,12 @@ const InventoryCard = ({ item, onStockUpdate }) => {
   };
 
   const handleDecrease = async () => {
-    if (decreaseQuantity <= 0 || !email) {
-      setError('Please enter a valid quantity greater than 0 and a valid email address.');
+    if (decreaseQuantity <= 0) {
+      setError('Please enter a valid quantity greater than 0.');
       return;
     }
 
     const requestBody = {
-      email: email,
       items: [
         {
           productCode: item.productCode,
@@ -111,12 +109,6 @@ const InventoryCard = ({ item, onStockUpdate }) => {
 
           {/* Form for decreasing stock */}
           <div className="stock-form">
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
             <input
               type="number"
               placeholder="Quantity"
