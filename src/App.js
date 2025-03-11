@@ -10,6 +10,7 @@ import Products from "./pages/Products";
 import Navbar from "./components/common/NavBar";
 import Login from "./pages/Login";
 import Inventory from "./pages/Inventory";
+import Logout from "./pages/Logout";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/products" element={<Products />} />
                 <Route path="/login" element={<Login/>} />
                 <Route path="/inventory" element={<Inventory/>} />
+                <Route path="/logout" element={<Logout/>} />
             </Routes>
         </Router>
     );

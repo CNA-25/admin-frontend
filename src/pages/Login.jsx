@@ -1,6 +1,7 @@
 // Admin Frontend login page
 import React from "react";
 import LoginForm from "../components/page-specific/LoginForm";
+import "../style/LoginPage.css";
 
 const Login = () => {
 

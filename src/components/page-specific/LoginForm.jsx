@@ -1,5 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { Navigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import "../../style/LoginForm.css"
 
 // Based on GeeksForGeeks tutorial: Basic Registration and Login Form Using React Hook Form
@@ -24,12 +26,25 @@ function LoginForm() {
       const respData = await resp.json();
 
       if (resp.ok) {
+        const token = respData.access_token;
+        const decodedToken = jwtDecode(token);
+
+        if (decodedToken.role === "user") {
+          alert("Unauthorized: This user login is not allowed on this frontend.");
+          return;
+        }
+
+
         // Save JWT to localStorage
         localStorage.setItem('access_token', respData.access_token);
 
+        // Navigate to home page
+        return <Navigate to="/" replace />
+        
       }
     } catch (error) {
-      console.error(error.message)
+      alert(`An error when attempting to sign in: ${error.message}`);
+      console.error(error.message);
     }
   }
 
