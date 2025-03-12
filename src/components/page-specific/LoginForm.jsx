@@ -42,6 +42,9 @@ function LoginForm() {
         // Navigate to home page
         navigate('/', { replace: true });
         
+      } else {
+        alert(`An error when attempting to sign in: ${JSON.stringify(respData)}`);
+        console.log(JSON.stringify(respData));
       }
     } catch (error) {
       alert(`An error when attempting to sign in: ${error.message}`);
